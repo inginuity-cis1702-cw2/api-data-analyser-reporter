@@ -8,3 +8,6 @@ Project Goal: Develop a command-line tool that fetches data from a public API, p
 - Daniel
 - Ephraim
 - Simone
+- Connor
+- Joseph
+---- Daraei (TBC) ----
