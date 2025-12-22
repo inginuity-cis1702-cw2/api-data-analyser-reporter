@@ -25,6 +25,28 @@ def fetch_country_data(country_name):
         print(f"An error occurred while fetching data: {e}")
         return None
 
+# ---Previous Parse ---
+"""
+def parse_country_data(data):
+    try:
+     country = data[0]
+     
+        name = country["name"]["common"]
+        population = country["population"]
+        region = country["region"]
+        capital = country["capital"][0]
+    
+        return {
+        "name": name,
+        "population": population,
+        "region": region,
+        "capital": capital
+    }
+
+    except KeyError:
+        print("Unexpected data format received from the API.") 
+        return None
+"""
 
 def parse_country_data(data):
     """
@@ -34,29 +56,23 @@ def parse_country_data(data):
     try:
         # Access first country result from API response
         country = data[0]
-
-        # Extract required information from nested JSON fields
-        name = country["name"]["common"]
-        population = country["population"]
-        region = country["region"]
-        capital = country["capital"][0]
-
-        # Return extracted data dictionary
+        # Extract and return required information from nested JSON fields in dictionary
         return {
-            "name": name,
-            "population": population,
-            "region": region,
-            "capital": capital
+            "name": country["name"]["common"],
+            "population": country["population"],
+            "region": country["region"],
+            "capital": country["capital"][0],
+            "area": country["area"]
         }
-
-    except KeyError:
-        # Handle unexpected or missing fields within API response
-        print("Unexpected data format received from the API.") 
+    except (KeyError, IndexError, TypeError):
+        # Handle unexpected or missing fields within API response (now including Index & Type)
+        print("Error parsing country data.")
         return None
 
 # Handle Invalid User Input, Specifically required by brief
 if data is None:
     print("No data found. Please try again.")
+
 
 
 
