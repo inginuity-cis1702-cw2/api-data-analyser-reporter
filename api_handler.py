@@ -54,4 +54,9 @@ def parse_country_data(data):
         print("Unexpected data format received from the API.") 
         return None
 
+# Handle Invalid User Input, Specifically required by brief
+if data is None:
+    print("No data found. Please try again.")
+
+
 
