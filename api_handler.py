@@ -25,28 +25,6 @@ def fetch_country_data(country_name):
         print(f"An error occurred while fetching data: {e}")
         return None
 
-# ---Previous Parse ---
-"""
-def parse_country_data(data):
-    try:
-     country = data[0]
-     
-        name = country["name"]["common"]
-        population = country["population"]
-        region = country["region"]
-        capital = country["capital"][0]
-    
-        return {
-        "name": name,
-        "population": population,
-        "region": region,
-        "capital": capital
-    }
-
-    except KeyError:
-        print("Unexpected data format received from the API.") 
-        return None
-"""
 
 def parse_country_data(data):
     """
@@ -70,8 +48,18 @@ def parse_country_data(data):
         return None
 
 # Handle Invalid User Input, Specifically required by brief
-if data is None:
-    print("No data found. Please try again.")
+if __name__ == "__main__":
+    country_name = input("Enter a country name: ")
+    data = fetch_country_data(country_name)
+    if data is None:
+        print("No data found. Please try again.")
+    else:
+        parsed_data = parse_country_data(data)
+        if parsed_data is None:
+            print("Failed to parse country data.")
+        else:
+            print(parsed_data)
+
 
 
 
