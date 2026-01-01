@@ -1,6 +1,9 @@
 # Import urllib to handle HTTP requests using the Python standard library
 import urllib.request
 
+# Import urllib.parse to safely encode user input for URLs
+import urllib.parse # UK error fix
+
 # Import json to parse JSON data returned by the API
 import json
 
@@ -10,8 +13,11 @@ def fetch_country_data(country_name):
     Fetches raw country data from the REST Countries API based on the user's input.
     """
     try:
-        # Construct API URL using provided country name
-        url = f"https://restcountries.com/v3.1/name/{country_name}"
+        # Encode user input to make it safe for use in a URL
+        encoded_country = urllib.parse.quote(country_name.strip())  # UK error fix
+
+        # Construct API URL using provided country name (updated to use encoded input) (#3)
+        url = f"https://restcountries.com/v3.1/name/{encoded_country}"  # UK error fix
 
         # Open connection to API and read response data
         with urllib.request.urlopen(url) as response:
@@ -59,6 +65,7 @@ if __name__ == "__main__":
             print("Failed to parse country data.")
         else:
             print(parsed_data)
+
 
 
 
