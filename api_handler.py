@@ -40,7 +40,7 @@ def parse_country_data(data):
             "population": country["population"],
             "region": country["region"],
             "capital": country["capital"][0],
-            "area": country["area"]
+            "area (km^2)": country["area"]
         }
     except (KeyError, IndexError, TypeError):
         # Handle unexpected or missing fields within API response (now including Index & Type)
@@ -59,6 +59,7 @@ if __name__ == "__main__":
             print("Failed to parse country data.")
         else:
             print(parsed_data)
+
 
 
 
