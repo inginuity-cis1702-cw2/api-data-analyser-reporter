@@ -4,6 +4,12 @@ import urllib.request
 import json
 # from datetime import date
 
+def isfloat(string):
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
 
 def get_geo_pos(code: str, country: str) -> Any:
     """
@@ -24,7 +30,7 @@ def get_geo_pos(code: str, country: str) -> Any:
             request = f.read() # json byte string
             payload = json.loads(request) # convert to python accessible cict
             print(payload)
-            assert isinstance(payload["latitude"], float) and isinstance(payload["longitude"], float),(
+            assert isfloat(payload["latitude"]) and isfloat(payload["longitude"]),(
                 f"Error: Request failed.\nPayload: {payload}"
             )
             return payload
@@ -42,7 +48,7 @@ def get_sun_info(latitude: float, longitude: float, date: str = "") -> Any:
     """
 
     # -- sanity checks --------------------------------------------------------
-    assert not(isinstance(latitude, float) and isinstance(longitude, float)), (
+    assert isinstance(latitude, float) and isinstance(longitude, float), (
         "Error: latitude and logitude must be of type: float"
     )
 
