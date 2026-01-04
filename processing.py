@@ -9,13 +9,13 @@ def get_utc_time() -> str:
     """
     verbose = datetime.now(timezone.utc)
     time    = verbose.strftime("%H:%M:%S %p")
-    print(type(verbose))
+    # print(type(verbose))
     return time
 
 def get_today() -> list:
     verbose = datetime.now(timezone.utc)
     today   = verbose.strftime("%Y-%m-%d").split('-')
-    print(today)
+    # print(today)
     return today
 
 # -- compare time to sun info ---------------------------------------
@@ -57,6 +57,7 @@ def time_until_target(target:str) -> str:
 
 
 def main() -> None:
+    print(get_today())
     print(get_utc_time())
     print(time_until_target('4:13:22 PM'))
 
