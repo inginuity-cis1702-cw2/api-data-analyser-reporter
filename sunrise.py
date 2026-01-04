@@ -29,8 +29,7 @@ def get_geo_pos(code: str, country: str) -> Any:
         with urllib.request.urlopen(url) as f:
             request = f.read() # json byte string
             payload = json.loads(request) # convert to python accessible cict
-            print(payload)
-            assert isfloat(payload["latitude"]) and isfloat(payload["longitude"]),(
+            assert isinstance(payload["results"][code], list), (
                 f"Error: Request failed.\nPayload: {payload}"
             )
             return payload
