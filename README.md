@@ -11,3 +11,9 @@ Project Goal: Develop a command-line tool that fetches data from a public API, p
 - Connor
 - Joseph
 - Daraei
+
+## APIs Used
+
+- restcountries.com
+- zipcodestack.com
+- sunrise-sunset.org
