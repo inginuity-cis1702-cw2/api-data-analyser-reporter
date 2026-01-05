@@ -1,6 +1,6 @@
 from .api_handler import fetch_country_data, parse_country_data
 from .country_input import get_user_input
-from .processing import get_today, get_utc_time, time_until_target
+from .processing import get_today, get_utc_time, time_until
 from .sunrise import get_sun_info
 
 
@@ -42,33 +42,65 @@ def try_again() -> bool:
                 print("Invalid input. Please enter 'y' or 'n'.")
                 continue
 
-def logger() -> dict:
+
+def collect_data(user_req: dict) -> dict:
     """
-    Wraps user input function with logging functionality.
+    Use user's requested country and return selected facts
+    """
+
+    # -- datasets ---------------------------------------------------
+    req = fetch_country_data(user_req['country'])
+    parsed_data = parse_country_data(req)
+    assert req is not None, "Country data not found"
+    assert parsed_data is not None, "Country data not found"
+
+    sun_related = {
+        "sunrise": req[0]['latlng'],
+        "sunset": req[0]['latlng'],
+    }
+
+    # -- collect data -----------------------------------------------
+    collection  = {}
+    for i in user_req['data_points']:
+        if (latlng := sun_related.get(i, False)):
+            payload = get_sun_info(latlng[0], latlng[1])
+            time_diff = time_until(payload['results'][i])
+            data = f"{i}: {payload['results'][i]}. Time time until {i}: {time_diff}"
+            print(data)
+            collection[i] = data
+        else:
+            collection[i] = parsed_data[i]
+    return collection
+
+def logger() -> tuple:
+    """
+    Wraps user input functions with logging functionality.
     Each iteration is stored in zero indexed dictionary.
     """
     i = 0
     user_log = {}
     while True:
         user_input = get_user_input()
-        user_log[i] = user_input
+        requested  = collect_data(user_input)
+        user_log[i] = requested
+        print(user_log[i])
         retry = try_again()
         if retry:
             i += 1
             continue
-        return user_log
 
+        return (user_input, user_log)
 
 
 def main() -> None:
-    # log = logger()
-    # print(log)
-    print(fetch_country_data("japan")) ## caa2
+    # print(fetch_country_data("japan")) ## caa2
+    inputs, outputs = logger()
+    print(f"Inputs:{inputs}\nOutputs:{outputs}")
     ## timezone 'timezones': ['UTC+09:00'],
     # 'latlng': [35.68, 139.75]
-    
-    
-    
+
+
+
 
 if __name__ == "__main__":
     main()
