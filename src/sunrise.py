@@ -2,7 +2,6 @@
 from typing import Any
 import urllib.request
 import json
-# from datetime import date
 
 def isfloat(string):
     try:
