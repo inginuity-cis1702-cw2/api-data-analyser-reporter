@@ -46,7 +46,12 @@ def parse_country_data(data):
             "population": country["population"],
             "region": country["region"],
             "capital": country["capital"][0],
-            "area (km^2)": country["area"]
+            "area (km^2)": country["area"],
+
+            # -- added some more options -- Ephraim -------------------- #
+            "timezone": country['timezones'],                            #
+            "languages": ", ".join(list(country['languages'].values())), #
+            # ---------------------------------------------------------- #
         }
     except (KeyError, IndexError, TypeError):
         # Handle unexpected or missing fields within API response (now including Index & Type)
@@ -65,10 +70,3 @@ if __name__ == "__main__":
             print("Failed to parse country data.")
         else:
             print(parsed_data)
-
-
-
-
-
-
-
