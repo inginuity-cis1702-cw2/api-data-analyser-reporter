@@ -93,11 +93,9 @@ def logger() -> tuple:
 
 
 def main() -> None:
-    # print(fetch_country_data("japan")) ## caa2
+
     inputs, outputs = logger()
-    print(f"Inputs:{inputs}\nOutputs:{outputs}")
-    ## timezone 'timezones': ['UTC+09:00'],
-    # 'latlng': [35.68, 139.75]
+    print(f"\nInputs:{inputs}\nOutputs:{outputs}")
 
 
 
