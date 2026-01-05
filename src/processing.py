@@ -21,7 +21,7 @@ def get_today() -> list:
 # -- compare time to sun info ---------------------------------------
 # https://blog.finxter.com/5-best-ways-to-compare-times-in-python/
 # https://dnmtechs.com/comparing-time-differences-in-python-3/
-def time_until_target(target:str) -> str:
+def time_until(target:str) -> str:
     """
     Returns time until target time. If event has passed then a generic
     string is returned. All times in UTC.
@@ -59,7 +59,7 @@ def time_until_target(target:str) -> str:
 def main() -> None:
     print(get_today())
     print(get_utc_time())
-    print(time_until_target('4:13:22 PM'))
+    print(time_until('4:13:22 PM'))
 
 
 
