@@ -4,29 +4,6 @@ from .processing import get_today, get_utc_time, time_until
 from .sunrise import get_sun_info
 
 
-# -- possibly redunant ----------------------------------------------
-# country = input("Enter a country name: ")
-# raw_data = fetch_country_data(country)
-#
-# if raw_data:
-#     parsed = parse_country_data(raw_data)
-#     if parsed:
-#         print(parsed)
-#     else:
-#         print(f"Warning: '{key}' is not available for this country.")
-#
-#     # Step 5: Display the filtered data
-#     print("\nSelected data:")
-#     print(selected_data)
-#
-# if __name__ == "__main__":
-#     main()
-#
-# -------------------------------------------------------------------
-
-# raw_data = fetch_country_data(country)
-#
-
 def try_again() -> bool:
     """
     Asks user to retry forever until they enter 'y' or 'n'
@@ -83,11 +60,15 @@ def logger() -> tuple:
         user_input = get_user_input()
         requested  = collect_data(user_input)
         user_log[i] = requested
-        print(user_log[i])
+        print(f"\nLogged:{user_log[i]}\n")
         retry = try_again()
         if retry:
             i += 1
             continue
+
+        save = input("Save data? (y/n): ")
+        if save.lower() == 'y':
+            ... # TODO: implement csv
 
         return (user_input, user_log)
 
