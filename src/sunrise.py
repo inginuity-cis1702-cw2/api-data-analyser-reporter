@@ -19,8 +19,8 @@ def get_geo_pos(code: str, country: str) -> Any:
         >>> (48.2077, 16.3705) # (latitude, longitude)
     """
     # -- sanity checks --------------------------------------------------------
-    assert isinstance(country, str), ValueError("Error: country must be type: str")
-    assert isinstance(code, str), ValueError("Error: code must be type: str")
+    assert isinstance(country, str), ValueError("Error: Country must be type: str")
+    assert isinstance(code, str), ValueError("Error: Postal code must be type: str")
 
     # -- request --------------------------------------------------------------
     API_KEY = "zip_live_C07XaIk50pN0hTsI8Nnxr8Wm9ZWstQlFScRLwYdN"
@@ -57,7 +57,9 @@ def get_sun_info(latitude: float, longitude: float, date: str = "") -> Any:
         with urllib.request.urlopen(url) as f:
             request = f.read() # json byte string
             payload = json.loads(request) # convert to python accessible cict
-            assert payload["status"] == "OK", KeyError(f"Error: Request failed.\nPayload: {payload}")
+            assert payload["status"] == "OK",(
+                KeyError(f"Error: Request failed.\nPayload: {payload}")
+            )
             return payload
     except ValueError:
         print("Error: Invalid URL")
