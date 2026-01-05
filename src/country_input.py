@@ -21,9 +21,10 @@ def get_user_input():
         # Added options so users know valid inputs -- Ephraim
         if data.lower() == "help":
             print("\noptions:\n"
-                "name","population","region","capital",
+                "name","population","region","capital", 'languages',
                 "area(km^2)","sunrise","sunset", "timezone","\n"
             )
+            continue
 
         # Added split in case users list items on one line -- Ephraim
         # Changed append to += as split returns list -- Ephraim
