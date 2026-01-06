@@ -65,7 +65,7 @@ def get_sun_info(latitude: float, longitude: float, date: str = "") -> Any:
         return {}
 
 
-def main():
+def main(): # tests
     print(get_geo_pos("LS1", "GB"))
     print(get_sun_info(51.5074, -0.1278))
 

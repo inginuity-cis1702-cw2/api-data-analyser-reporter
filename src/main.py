@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
-from api_handler import fetch_country_data, parse_country_data
-from country_input import get_user_input
-from processing import get_today, get_utc_time, time_until
-from sunrise import get_sun_info
-from output_csv import save_user_log_csv #-- Dan Foy-- Fixed save issue --
+
+# -- Ephraim -- imports were acting weird. Moved everything into __init__.py
+# Then get imports from a single point src
+from src import (
+    get_user_input,
+    get_sun_info,
+    time_until,
+    save_user_log_csv,
+    save_to_json,
+    fetch_country_data,
+    parse_country_data,
+)
 
 def try_again() -> bool:
     """
@@ -69,18 +76,28 @@ def logger() -> tuple:
 
         save = input("Save data? (y/n): ")
         if save.lower() == 'y':
-            ... # TODO: implement csv
-
-        return (user_input, user_log)
+            return (user_input, user_log)
+        return (None, None)
 
 
 def main() -> None:
 
     inputs, outputs = logger()
+    if inputs is None and outputs is None:
+        print("No data to save.")
+        return
+
+    save_location = int(input("Enter save location (1 for JSON, 2 for CSV): "))
+    match save_location:
+        case 1:
+            save_to_json(inputs, outputs)
+        case 2:
+            save_user_log_csv(outputs) #-- Dan Foy-- Fixed save issue --
+        case _:
+            print("Invalid save location.")
     print(f"\nInputs:{inputs}\nOutputs:{outputs}")
-    save_user_log_csv(outputs) #-- Dan Foy-- Fixed save issue --
+    # save_user_log_csv(outputs) #-- Dan Foy-- Fixed save issue --
 
 
 if __name__ == "__main__":
     main()
-

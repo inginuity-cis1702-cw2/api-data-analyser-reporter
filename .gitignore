@@ -1,2 +1,6 @@
 # [ compiled files ]
 *.pyc
+
+# [ user generated files ]
+*.json
+*.csv
