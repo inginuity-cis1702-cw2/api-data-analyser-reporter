@@ -27,9 +27,9 @@ def save_user_log_csv(user_log: dict, filename="user_log.csv"):
         
         #Write the header row in the CSV file
         writer.writerow([
-            "log_index"
-            "requested_data"
-            "value"
+            "log_index",
+            "requested_data",
+            "value",
             "timestamp"
         ])
         
@@ -109,3 +109,4 @@ if __name__ == "__main__":
     #Run the application only when executed directly
 
     logger()
+
