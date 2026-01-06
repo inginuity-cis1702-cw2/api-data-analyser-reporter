@@ -1,7 +1,8 @@
-from .api_handler import fetch_country_data, parse_country_data
-from .country_input import get_user_input
-from .processing import get_today, get_utc_time, time_until
-from .sunrise import get_sun_info
+#!/usr/bin/env python3
+from api_handler import fetch_country_data, parse_country_data
+from country_input import get_user_input
+from processing import get_today, get_utc_time, time_until
+from sunrise import get_sun_info
 
 
 def try_again() -> bool:
