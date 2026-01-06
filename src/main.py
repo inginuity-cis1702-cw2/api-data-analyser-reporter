@@ -3,7 +3,7 @@ from api_handler import fetch_country_data, parse_country_data
 from country_input import get_user_input
 from processing import get_today, get_utc_time, time_until
 from sunrise import get_sun_info
-
+from output_csv import save_user_log_csv #-- Dan Foy-- Fixed save issue --
 
 def try_again() -> bool:
     """
@@ -78,9 +78,9 @@ def main() -> None:
 
     inputs, outputs = logger()
     print(f"\nInputs:{inputs}\nOutputs:{outputs}")
-
-
+    save_user_log_csv(outputs) #-- Dan Foy-- Fixed save issue --
 
 
 if __name__ == "__main__":
     main()
+
