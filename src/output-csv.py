@@ -1,7 +1,7 @@
-from .api_handler import fetch_country_data, parse_country_data
-from .country_input import get_user_input
-from .processing import get_today, get_utc_time, time_until
-from .sunrise import get_sun_info
+from api_handler import fetch_country_data, parse_country_data
+from country_input import get_user_input
+from processing import get_today, get_utc_time, time_until
+from sunrise import get_sun_info
 
 import csv
 from datetime import datetime
@@ -107,4 +107,5 @@ def logger():
 
 if __name__ == "__main__":
     #Run the application only when executed directly
+
     logger()
